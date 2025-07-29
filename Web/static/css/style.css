@@ -1,0 +1,436 @@
+/* 全局重置 */
+* { margin:0; padding:0; box-sizing:border-box; }
+body {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background: #f8f9fa;
+    margin: 0;
+    padding: 0;
+}
+.navbar {
+    position: sticky;
+    top: 0;
+    background: #222;
+    color: #fff;
+    padding: 16px 40px;
+    font-size: 1.3em;
+    z-index: 100;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+}
+.nav-title {
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+.hero {
+    padding: 32px 40px 16px 40px;
+    background: #fff;
+    border-bottom: 1px solid #eee;
+}
+.hero h1 {
+    margin: 0 0 8px 0;
+    font-size: 2.2em;
+    color: #222;
+}
+.hero p {
+    margin: 0;
+    color: #555;
+    font-size: 1.1em;
+}
+.filter-bar {
+    display: flex;
+    gap: 32px;
+    align-items: center;
+    padding: 20px 40px 10px 40px;
+    background: #f5f5f5;
+    border-bottom: 1px solid #eee;
+    flex-wrap: wrap;
+}
+.filter-bar label {
+    font-size: 1.08em;
+    color: #333;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    min-width: 220px;
+}
+#year-slider {
+    width: 180px;
+}
+#year-value {
+    min-width: 40px;
+    display: inline-block;
+    text-align: left;
+    color: #0074D9;
+    font-weight: bold;
+}
+select {
+    font-size: 1em;
+    padding: 4px 8px;
+    border-radius: 4px;
+    border: 1px solid #bbb;
+    background: #fff;
+}
+.card-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 32px;
+    padding: 32px 40px;
+}
+.card {
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+    padding: 24px 18px 32px 18px;
+    min-height: 420px;
+    display: flex;
+    flex-direction: column;
+}
+.card h2 {
+    margin-top: 0;
+    font-size: 1.2em;
+    color: #222;
+    margin-bottom: 12px;
+}
+.placeholder {
+    color: #aaa;
+    font-size: 1.1em;
+    margin-top: 32px;
+    text-align: center;
+}
+.footer {
+    background: #222;
+    color: #fff;
+    text-align: center;
+    padding: 18px 0;
+    font-size: 1em;
+    margin-top: 40px;
+}
+.act-box {
+    margin: 12px 0 0 0;
+    font-size: 1.05em;
+    color: #444;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+#act-label {
+    cursor: pointer;
+    user-select: none;
+}
+.side-panels {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    min-width: 320px;
+}
+#act-desc {
+    background: #f1f1f1;
+    border-left: 3px solid #FF4136;
+    padding: 8px 16px;
+    margin-top: 4px;
+    font-size: 0.98em;
+    color: #333;
+    max-width: 500px;
+}
+#transportation-acts-desc {
+    background: #f1f1f1;
+    border-left: 3px solid #FF4136;
+    padding: 8px 16px;
+    margin-top: 4px;
+    font-size: 0.98em;
+    color: #333;
+    max-width: 500px;
+}
+#chart {
+    margin-top: 18px;
+    background: #fff;
+    border-radius: 8px;
+    min-height: 320px;
+}
+.chart-campaign-row {
+    display: flex;
+    flex-direction: row;
+    gap: 32px;
+    align-items: flex-start;
+    justify-content: space-between;
+}
+#chart.centered-chart {
+    flex: 1 1 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 18px 0 0 0;
+    background: #fff;
+    border-radius: 8px;
+    min-height: 320px;
+    max-width: 800px;
+}
+.campaign-panel {
+    flex: none;
+    width: 320px;
+    background: #f7f7fa;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+    padding: 18px 18px 12px 18px;
+    font-size: 1em;
+    color: #333;
+}
+.campaign-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: bold;
+    margin-bottom: 8px;
+}
+#campaign-details summary {
+    cursor: pointer;
+    font-weight: 500;
+    color: #333;  /* 改为黑色，与其他面板保持一致 */
+    margin-bottom: 8px;
+}
+#campaign-acts-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+#campaign-acts-list li {
+    margin-bottom: 10px;
+    border-left: 3px solid #0074D9;
+    padding-left: 10px;
+}
+#campaign-acts-list .act-title {
+    font-weight: 600;
+    color: #222;
+    cursor: pointer;
+}
+#campaign-acts-list .act-desc {
+    font-size: 0.97em;
+    color: #555;
+    margin-top: 2px;
+    display: none;
+}
+#campaign-acts-list .expanded .act-desc {
+    display: block;
+}
+.tooltip {
+    font-size: 1em;
+    color: #222;
+    background: #fff;
+    border: 1px solid #bbb;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    padding: 8px 12px;
+    border-radius: 4px;
+    pointer-events: none;
+    z-index: 1000;
+}
+.card-grid-vertical {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+    padding: 32px 40px;
+}
+.chart-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+}
+.act-box-right {
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+.act-box-below {
+    margin: 18px 0 0 0;
+    font-size: 1.05em;
+    color: #444;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+.offence-year-bar {
+    margin-bottom: 18px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+#bar-chart {
+    min-height: 320px;
+    margin-top: 8px;
+    background: #fff;
+    border-radius: 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.linechart-filters {
+    display: flex;
+    gap: 24px;
+    align-items: center;
+    margin-bottom: 18px;
+    flex-wrap: wrap;
+}
+.linechart-filters label {
+    font-size: 1.08em;
+    color: #333;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    min-width: 220px;
+}
+.bar-filters {
+    display: flex;
+    gap: 24px;
+    align-items: center;
+    margin-bottom: 18px;
+    flex-wrap: wrap;
+}
+.bar-filters label {
+    font-size: 1.08em;
+    color: #333;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    min-width: 180px;
+}
+.imprison-filters {
+    display: flex;
+    gap: 24px;
+    align-items: center;
+    margin-bottom: 18px;
+    flex-wrap: wrap;
+}
+.imprison-filters label {
+    font-size: 1.08em;
+    color: #333;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    min-width: 180px;
+}
+#imprison-chart {
+    min-height: 320px;
+    margin-top: 8px;
+    background: #fff;
+    border-radius: 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+#transportation-acts-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+#transportation-acts-list li {
+    margin-bottom: 10px;
+    border-left: 3px solid #2ECC40;
+    padding-left: 10px;
+}
+#transportation-acts-list .act-title {
+    font-weight: 600;
+    color: #222;
+    cursor: pointer;
+}
+#transportation-acts-list .act-desc {
+    font-size: 0.97em;
+    color: #555;
+    margin-top: 2px;
+    display: none;
+}
+#transportation-acts-list .expanded .act-desc {
+    display: block;
+}
+#act-details summary {
+    cursor: pointer;
+    font-weight: 500;
+    color: #333;
+    margin-bottom: 8px;
+}
+
+#transportation-details summary {
+    cursor: pointer;
+    font-weight: 500;
+    color: #333;
+    margin-bottom: 8px;
+}
+#act-acts-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+#act-acts-list li {
+    margin-bottom: 10px;
+    border-left: 3px solid #FF4136;
+    padding-left: 10px;
+}
+#act-acts-list .act-title {
+    font-weight: 600;
+    color: #222;
+    cursor: pointer;
+}
+#act-acts-list .act-desc {
+    font-size: 0.97em;
+    color: #555;
+    margin-top: 2px;
+    display: none;
+}
+#act-acts-list .expanded .act-desc {
+    display: block;
+}
+@media (max-width: 1100px) {
+    .card-grid {
+        grid-template-columns: 1fr;
+        gap: 24px;
+    }
+    .chart-campaign-row {
+        flex-direction: column;
+        gap: 18px;
+    }
+    .campaign-panel {
+        width: 100%;
+        margin-top: 12px;
+    }
+}
+@media (max-width: 900px) {
+    .filter-bar {
+        flex-direction: column;
+        gap: 16px;
+        align-items: flex-start;
+        padding: 18px 10px 8px 10px;
+    }
+    .filter-bar label {
+        min-width: 0;
+        width: 100%;
+    }
+    .linechart-filters {
+        flex-direction: column;
+        gap: 12px;
+        align-items: flex-start;
+        margin-bottom: 12px;
+    }
+    .linechart-filters label {
+        min-width: 0;
+        width: 100%;
+    }
+    .bar-filters {
+        flex-direction: column;
+        gap: 12px;
+        align-items: flex-start;
+        margin-bottom: 12px;
+    }
+    .bar-filters label {
+        min-width: 0;
+        width: 100%;
+    }
+    .imprison-filters {
+        flex-direction: column;
+        gap: 12px;
+        align-items: flex-start;
+        margin-bottom: 12px;
+    }
+    .imprison-filters label {
+        min-width: 0;
+        width: 100%;
+    }
+}
