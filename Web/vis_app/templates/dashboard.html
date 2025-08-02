@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Visual Analytics</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="nav-title">Old Bailey Online Visual Analytics</div>
+    </nav>
+    <!-- Hero Section -->
+    <section class="hero">
+        <h1>Punishment and Sentencing Analysis</h1>
+        <p>Explore the trends of offence and punishment in the Old Bailey from 1674 to 1913.</p>
+    </section>
+    <!-- Card Grid -->
+    <section class="card-grid-vertical">
+        <div class="card" id="card-1">
+            <div class="card-header">
+                <h2>Annual Rate Line Chart</h2>
+                <p class="card-description">Track the changing trends of offences and punishments over time. Filter by specific categories and observe how historical events and legal reforms influenced sentencing patterns.</p>
+            </div>
+            <div class="linechart-filters">
+                <label>Offence Category:
+                    <select id="offence-category-select"></select>
+                </label>
+                <label>Offence Subcategory:
+                    <select id="offence-subcategory-select"></select>
+                </label>
+                <label>Punishment Category:
+                    <select id="punishment-category-select"></select>
+                </label>
+                <label>Punishment Subcategory:
+                    <select id="punishment-subcategory-select"></select>
+                </label>
+            </div>
+            <div class="chart-campaign-row">
+                <div id="chart" class="centered-chart"></div>
+                <aside class="side-panels">
+                    <div class="campaign-panel">
+                        <div class="campaign-header">
+                            <input type="checkbox" id="campaign-toggle">
+                            <label for="campaign-toggle" id="campaign-label">Campaign Against Death Sentence</label>
+                        </div>
+                        <details id="campaign-details">
+                            <summary>Show Acts</summary>
+                            <ul id="campaign-acts-list"></ul>
+                        </details>
+                    </div>
+                    <div class="campaign-panel">
+                        <div class="campaign-header">
+                            <input type="checkbox" id="act-toggle">
+                            <label for="act-toggle" id="act-label">Prison Act 1835</label>
+                        </div>
+                        <details id="act-details">
+                            <summary>Show Act</summary>
+                            <ul id="act-acts-list"></ul>
+                        </details>
+                    </div>
+                    <div class="campaign-panel">
+                        <div class="campaign-header">
+                            <input type="checkbox" id="transportation-toggle">
+                            <label for="transportation-toggle" id="transportation-label">Transportation</label>
+                        </div>
+                        <details id="transportation-details">
+                            <summary>Show Acts</summary>
+                            <ul id="transportation-acts-list"></ul>
+                        </details>
+                    </div>
+                </aside>
+            </div>
+        </div>
+        <div class="card" id="card-2">
+            <div class="card-header">
+                <h2>Punishment Distribution</h2>
+                <p class="card-description">Analyze the distribution of different punishment types across offence categories or social classes. 
+                    Understand how sentencing varied between different groups and time periods（Exclude unknown offence and social class）.</p>
+            </div>
+            <div class="bar-filters">
+                <label>Group by:
+                    <select id="bar-groupby-select">
+                        <option value="offence_category">Offence Category</option>
+                        <option value="hisclass">Social Class</option>
+                    </select>
+                </label>
+                <label>Start Year:
+                    <select id="bar-year-start-select"></select>
+                </label>
+                <label>End Year:
+                    <select id="bar-year-end-select"></select>
+                </label>
+                <label style="margin-left:18px;">
+                    <input type="checkbox" id="bar-exclude-death"> Exclude death
+                </label>
+            </div>
+            <div id="bar-chart"></div>
+        </div>
+        <div class="card" id="card-3">
+            <div class="card-header">
+                <h2>Imprisonment Analysis</h2>
+                <p class="card-description">Examine detailed imprisonment sentencing patterns. Compare average sentences across different offence types, theft values,
+                     offender types, and violent crimes to understand sentencing severity (Exclude unknown values).</p>
+            </div>
+            <div class="imprison-filters">
+                <label>Analysis Type:
+                    <select id="imprison-analysis-select">
+                        <option value="avg_sentence">Average Sentence by Offence</option>
+                        <option value="theft_value">Sentence by Theft Value</option>
+                        <option value="habitual_vs_first">Habitual vs First-time Offenders</option>
+                        <option value="violent_crime">Violent Crime Sentences</option>
+                    </select>
+                </label>
+                <label>Start Year:
+                    <select id="imprison-year-start-select"></select>
+                </label>
+                <label>End Year:
+                    <select id="imprison-year-end-select"></select>
+                </label>
+                <label style="margin-left:18px;">
+                    <input type="checkbox" id="imprison-show-average"> Show total average (by offence & violent crime only)
+                </label>
+            </div>
+            <div class="imprison-chart-row">
+                <div id="imprison-chart"></div>
+                <aside class="imprison-side-panels">
+                    <div class="violent-crime-panel" id="violent-crime-panel" style="display: none;">
+                        <div class="violent-crime-header">
+                            <h3>Violent Crime Categories</h3>
+                        </div>
+                        <div class="violent-crime-content">
+                            <div class="crime-category">
+                                <h4>Breaking Peace</h4>
+                                <ul>
+                                    <li>Assault</li>
+                                    <li>Wounding</li>
+                                    <li>Riot</li>
+                                    <li>Threatening Behaviour</li>
+                                </ul>
+                            </div>
+                            <div class="crime-category">
+                                <h4>Kill</h4>
+                                <ul>
+                                    <li>Murder</li>
+                                    <li>Manslaughter</li>
+                                    <li>Infanticide</li>
+                                    <li>Petty Treason</li>
+                                </ul>
+                            </div>
+                            <div class="crime-category">
+                                <h4>Sexual</h4>
+                                <ul>
+                                    <li>Rape</li>
+                                    <li>Indecent Assault</li>
+                                    <li>Assault with Intent</li>
+                                    <li>Assault With Sodomitical Intent</li>
+                                    <li>Sodomy</li>
+                                </ul>
+                            </div>
+                            <div class="crime-category">
+                                <h4>Violent Theft</h4>
+                                <ul>
+                                    <li>Robbery</li>
+                                    <li>Highway Robbery</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </aside>
+            </div>
+        </div>
+    </section>
+    <!-- Footer -->
+    <footer class="footer">
+        <div>Data Source: <a href="https://www.oldbaileyonline.org/" target="_blank">Old Bailey Online</a> | Author: YC</div>
+    </footer>
+    <script src="/static/js/main.js"></script>
+</body>
+</html>
